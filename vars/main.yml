@@ -12,6 +12,7 @@ deps:
   - build-essential 
   - libass-dev 
   #- libgpac-dev
+  - nasm
   - libtheora-dev 
   - libtool 
   - libvorbis-dev 

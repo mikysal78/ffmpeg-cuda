@@ -17,10 +17,10 @@
        dest={{ source_dir }}/yasm 
        accept_hostkey=yes
 
- name: clone latest fdk-aac
- git: repo={{ repo_fdk-aac }}
-      dest={{ source_dir }}/fdk-aac
-      accept_hostkey=yes
+- name: clone latest fdk-aac
+  git: repo={{ repo_fdk-aac }}
+       dest={{ source_dir }}/fdk-aac
+       accept_hostkey=yes
 
 - name: clone latest x264
   git: repo={{ repo_x264 }}

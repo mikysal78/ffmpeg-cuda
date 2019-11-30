@@ -11,7 +11,7 @@ deps:
   - automake 
   - build-essential 
   - libass-dev 
-  - libgpac-dev
+  #- libgpac-dev
   - libtheora-dev 
   - libtool 
   - libvorbis-dev 

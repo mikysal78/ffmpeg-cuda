@@ -1,0 +1,10 @@
+---
+# defaults file for ffmpeg-cuda
+# Git repo
+
+repo_yasm: git://github.com/yasm/yasm.git 
+repo_fdk-aac: git://github.com/mstorsjo/fdk-aac.git
+repo_x264: git://git.videolan.org/x264.git
+repo_libvpx: https://chromium.googlesource.com/webm/libvpx.git
+repo_ffmpeg: git://source.ffmpeg.org/ffmpeg.git
+repo_opus: git://git.opus-codec.org/opus.git

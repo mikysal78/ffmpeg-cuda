@@ -1,0 +1,22 @@
+---
+# vars file for ffmpeg-cuda
+source_dir: "/opt"
+lib_dir: "/usr/local/lib"
+bin_dir: "/usr/local/bin"
+
+# pacchetti necessari
+deps:
+  - git-core
+  - autoconf 
+  - automake 
+  - build-essential 
+  - libass-dev 
+  - libgpac-dev
+  - libtheora-dev 
+  - libtool 
+  - libvorbis-dev 
+  - pkg-config 
+  - texi2html 
+  - zlib1g-dev
+  - libmp3lame-dev
+

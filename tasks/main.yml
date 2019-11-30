@@ -1,0 +1,113 @@
+---
+# tasks file for ffmpeg-cuda
+
+# apt
+- name: Update APT package cache
+  apt: update_cache=yes
+  tags: apt
+
+- name: Install packages
+  apt: >
+    name={{ deps }} state=latest
+  tags: apt
+
+# git
+- name: clone latest yasm
+  git: repo={{ repo_yasm }}
+       dest={{ source_dir }}/yasm 
+       accept_hostkey=yes
+
+ name: clone latest fdk-aac
+ git: repo={{ repo_fdk-aac }}
+      dest={{ source_dir }}/fdk-aac
+      accept_hostkey=yes
+
+- name: clone latest x264
+  git: repo={{ repo_x264 }}
+       dest={{ source_dir }}/x264
+       accept_hostkey=yes
+
+- name: clone latest libvpx
+  git: repo={{ repo_libvpx }}
+       dest={{ source_dir }}/libvpx
+       accept_hostkey=yes
+
+- name: clone latest ffmpeg
+  git: repo={{ repo_ffmpeg }}
+       dest={{ source_dir }}/ffmpeg
+       accept_hostkey=yes
+
+- name: clone latest opus
+  git: repo={{ repo_opus }}
+       dest={{ source_dir }}/opus
+       accept_hostkey=yes
+
+
+# Compiling
+- name: compile yasm 
+  command: "{{ item }}"
+  args:
+    chdir: "{{ source_dir }}/yasm" 
+    creates: "{{ bin_dir }}/yasm"
+  with_items:
+    - ./autogen.sh
+    - ./configure --bindir={{ bin_dir }}
+    - make
+    - make install
+    - make distclean
+
+- name: compile x264
+  command: "{{ item }}" 
+  args:
+    chdir: "{{ source_dir }}/x264" 
+    creates: "{{ bin_dir }}/x264"
+  with_items:
+    - ./configure --bindir={{ bin_dir }} --enable-static
+    - make
+    - make install
+    - make distclean
+
+- name: compile fdk-aac
+  command: "{{ item }}" 
+  args:
+    chdir: "{{ source_dir }}/fdk-aac" 
+    creates: "{{ lib_dir }}/libfdk-aac.a"
+  with_items:
+    - autoreconf -fiv
+    - ./configure --disable-shared
+    - make
+    - make install
+    - make distclean
+
+- name: compile libopus
+  command: "{{ item }}" 
+  args:
+    chdir: "{{ source_dir }}/opus" 
+    creates: "{{ lib_dir }}/libopus.a"
+  with_items:
+    - ./autogen.sh
+    - ./configure --disable-shared
+    - make
+    - make install
+    - make distclean
+
+- name: compile libvpx
+  command: "{{ item }}" 
+  args:
+    chdir: "{{ source_dir }}/libvpx" 
+    creates: "{{ lib_dir }}/libvpx.a"
+  with_items:
+    - ./configure --disable-shared
+    - make
+    - make install
+    - make clean
+
+- name: compile ffmpeg
+  command: "{{ item }}" 
+  args:
+    chdir: "{{ source_dir }}/ffmpeg"
+  with_items:
+    - ./configure --disable-decoder=amrnb --disable-decoder=libopenjpeg --disable-libopencv --disable-outdev=sdl2 --disable-podpages --disable-sndio --disable-stripping --enable-libaom --enable-avfilter --enable-avresample --enable-gcrypt --disable-gnutls --enable-openssl --enable-gpl --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libfdk-aac --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libilbc --enable-libkvazaar --enable-libmp3lame --enable-libopenh264 --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libx265 --enable-libzimg --enable-libxvid --enable-libzvbi --enable-nonfree --enable-opencl --enable-opengl --enable-postproc --enable-pthreads --enable-shared --enable-version3 --enable-libwebp --enable-libx264 --enable-libdc1394 --enable-vaapi --enable-libmfx --enable-libvmaf --disable-altivec --enable-nvenc --enable-cuda --enable-cuvid --enable-cuda-nvcc --enable-libnpp --extra-cflags=-I/usr/local/cuda/include --extra-ldflags=-L/usr/local/cuda/lib64
+    - make
+    - make install
+    - make distclean

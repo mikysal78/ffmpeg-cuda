@@ -18,7 +18,7 @@
        accept_hostkey=yes
 
 - name: clone latest fdk-aac
-  git: repo={{ repo_fdk-aac }}
+  git: repo={{ repo_fdk_aac }}
        dest={{ source_dir }}/fdk-aac
        accept_hostkey=yes
 

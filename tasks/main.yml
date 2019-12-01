@@ -115,6 +115,9 @@
     - make
     - make install
 
+- name: copy file cudash in profile.d and setting path
+  copy: src=../files/cuda.sh dest=/etc/profile.d/cuda.sh
+
 - name: ldconfig cuda for nvcc
   copy: src=../files/cuda.conf dest=/etc/ld.so.conf.d/cuda.conf
 

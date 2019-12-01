@@ -53,4 +53,7 @@ deps:
   - libgcrypt20-dev
   - libcdio-paranoia-dev
   - libavresample-dev
+  - libfdk-aac-dev
+  - libx264-dev
+  - libvpx-dev
 

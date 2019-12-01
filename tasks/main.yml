@@ -17,21 +17,6 @@
        dest={{ source_dir }}/yasm 
        accept_hostkey=yes
 
-- name: clone latest fdk-aac
-  git: repo={{ repo_fdk_aac }}
-       dest={{ source_dir }}/fdk-aac
-       accept_hostkey=yes
-
-- name: clone latest x264
-  git: repo={{ repo_x264 }}
-       dest={{ source_dir }}/x264
-       accept_hostkey=yes
-
-- name: clone latest libvpx
-  git: repo={{ repo_libvpx }}
-       dest={{ source_dir }}/libvpx
-       accept_hostkey=yes
-
 - name: clone latest ffmpeg
   git: repo={{ repo_ffmpeg }}
        dest={{ source_dir }}/ffmpeg
@@ -41,7 +26,6 @@
   git: repo={{ repo_nv_codec }}
        dest={{ source_dir }}/nv_codec
        accept_hostkey=yes
-
 
 # Compiling
 - name: compile yasm 
@@ -55,40 +39,6 @@
     - make
     - make install
     - make distclean
-
-- name: compile x264
-  command: "{{ item }}" 
-  args:
-    chdir: "{{ source_dir }}/x264" 
-    creates: "{{ bin_dir }}/x264"
-  with_items:
-    - ./configure --bindir={{ bin_dir }} --enable-static
-    - make
-    - make install
-    - make distclean
-
-- name: compile fdk-aac
-  command: "{{ item }}" 
-  args:
-    chdir: "{{ source_dir }}/fdk-aac" 
-    creates: "{{ lib_dir }}/libfdk-aac.a"
-  with_items:
-    - autoreconf -fiv
-    - ./configure --disable-shared
-    - make
-    - make install
-    - make distclean
-
-- name: compile libvpx
-  command: "{{ item }}" 
-  args:
-    chdir: "{{ source_dir }}/libvpx" 
-    creates: "{{ lib_dir }}/libvpx.a"
-  with_items:
-    - ./configure --disable-shared
-    - make
-    - make install
-    - make clean
 
 - name: compile nv_codec
   command: "{{ item }}" 

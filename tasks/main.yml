@@ -42,6 +42,11 @@
        dest={{ source_dir }}/opus
        accept_hostkey=yes
 
+- name: clone latest nv_codec
+  git: repo={{ repo_nv_codec }}
+       dest={{ source_dir }}/nv_codec
+       accept_hostkey=yes
+
 
 # Compiling
 - name: compile yasm 
@@ -101,6 +106,14 @@
     - make
     - make install
     - make clean
+
+- name: compile nv_codec
+  command: "{{ item }}" 
+  args:
+    chdir: "{{ source_dir }}/nv_codec" 
+  with_items:
+    - make
+    - make install
 
 - name: compile ffmpeg
   command: "{{ item }}" 

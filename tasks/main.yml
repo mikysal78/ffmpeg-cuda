@@ -37,11 +37,6 @@
        dest={{ source_dir }}/ffmpeg
        accept_hostkey=yes
 
-- name: clone latest opus
-  git: repo={{ repo_opus }}
-       dest={{ source_dir }}/opus
-       accept_hostkey=yes
-
 - name: clone latest nv_codec
   git: repo={{ repo_nv_codec }}
        dest={{ source_dir }}/nv_codec
@@ -79,18 +74,6 @@
     creates: "{{ lib_dir }}/libfdk-aac.a"
   with_items:
     - autoreconf -fiv
-    - ./configure --disable-shared
-    - make
-    - make install
-    - make distclean
-
-- name: compile libopus
-  command: "{{ item }}" 
-  args:
-    chdir: "{{ source_dir }}/opus" 
-    creates: "{{ lib_dir }}/libopus.a"
-  with_items:
-    - ./autogen.sh
     - ./configure --disable-shared
     - make
     - make install

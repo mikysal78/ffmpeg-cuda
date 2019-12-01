@@ -20,4 +20,37 @@ deps:
   - texi2html 
   - zlib1g-dev
   - libmp3lame-dev
+  - libaom-dev
+  - libbluray-dev
+  - libbs2b-dev
+  - libcaca-dev
+  - libcodec2-dev
+  - libdc1394-22-dev
+  - libgme-dev
+  - libgsm1-dev
+  - libilbc-dev
+  - libkvazaar-dev
+  - libmfx-dev
+  - libopenh264-dev
+  - libopenjp2-7-dev
+  - libopenmpt-dev
+  - libopus-dev
+  - libpulse-dev
+  - librubberband-dev
+  - libshine-dev
+  - libsnappy-dev
+  - libsoxr-dev
+  - libspeex-dev
+  - libtesseract-dev
+  - libvidstab-dev
+  - libvmaf-dev
+  - libwebp-dev
+  - libx265-dev
+  - libxvidcore-dev
+  - libzimg-dev
+  - libzvbi-dev
+  - libqt5opengl5-dev
+  - libgcrypt20-dev
+  - libcdio-paranoia-dev
+  - libavresample-dev
 

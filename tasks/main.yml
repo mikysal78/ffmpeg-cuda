@@ -116,7 +116,7 @@
     - make install
 
 - name: ldconfig cuda for nvcc
-  copy: src=../files/cuda dest=/etc/ld.so.conf.d/cuda.conf
+  copy: src=../files/cuda.conf dest=/etc/ld.so.conf.d/cuda.conf
 
 - name: ldconfig
   command: /sbin/ldconfig

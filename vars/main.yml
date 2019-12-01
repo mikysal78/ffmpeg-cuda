@@ -56,4 +56,5 @@ deps:
   - libfdk-aac-dev
   - libx264-dev
   - libvpx-dev
+  - libssl-dev
 

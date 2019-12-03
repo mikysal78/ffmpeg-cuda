@@ -68,6 +68,6 @@
   #  - make distclean
 
 - name: Compile ffmpeg
-  command: "./configure {{ ffmpeg_compile_options }}"
-  args:
+  shell:
     chdir: "{{ source_dir }}/ffmpeg"
+    cmd: ./configure {{ ffmpeg_compile_options }}

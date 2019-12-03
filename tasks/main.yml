@@ -57,12 +57,17 @@
 - name: ldconfig
   command: /sbin/ldconfig
 
-- name: compile ffmpeg
-  command: "{{ item }}" 
+  #- name: compile ffmpeg
+  #command: "{{ item }}" 
+  #args:
+  #  chdir: "{{ source_dir }}/ffmpeg"
+  #with_items:
+  #  - "./configure {{ ffmpeg_compile_options }}"
+  #  - make -j$(nproc)
+  #  - make install
+  #  - make distclean
+
+- name: Compile ffmpeg
+  command: "./configure {{ ffmpeg_compile_options }}"
   args:
     chdir: "{{ source_dir }}/ffmpeg"
-  with_items:
-    - "./configure {{ ffmpeg_compile_options }}"
-    - make -j$(nproc)
-    - make install
-    - make distclean

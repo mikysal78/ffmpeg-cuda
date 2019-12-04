@@ -1,0 +1,163 @@
+#!/bin/bash
+
+#Vars
+HW='-y -hide_banner -threads 8 -hwaccel nvdec -hwaccel_output_format cuda'
+OPT='-preset slow -flags +loop -cmp chroma -subq 6 -me_range 16 -g 250 -keyint_min 25 -sc_threshold 40 -i_qfactor 0.71 -b_strategy 1'
+TITLES='-metadata title'
+DESC='-metadata description'
+COMM='-metadata comment'
+LANG_ITA='-map 0:v -map 0:m:language:ita'
+LANG_STD='-map 0:v -map 0:a?'
+
+# Windows dialog
+HEIGHT=15
+WIDTH=80
+CHOICE_HEIGHT=7
+BACKTITLE="Converi i tuoi video"
+TITLE="Converti i file nei formati: 360p - 480p - 720p - 1080p"
+MENU="Scegli in quale formato vuoi converire:"
+
+OPTIONS=(1 "Converti in 360p"
+         2 "Converti in 480p"
+         3 "Converti in 720p"
+         4 "Converti in 720p con AC5.1"
+	 5 "Converti in 1080p"
+	 6 "Converti in 1080 con AC5.1"
+	 7 "Converti da TS a MP4 solo")
+
+CHOICE=$(dialog --clear \
+                --backtitle "$BACKTITLE" \
+                --title "$TITLE" \
+                --menu "$MENU" \
+                $HEIGHT $WIDTH $CHOICE_HEIGHT \
+                "${OPTIONS[@]}" \
+                2>&1 >/dev/tty)
+clear
+
+case $CHOICE in
+  1)
+    echo "Hai scelto 360p"
+    H=360
+    DEST_DIR=`basename "$PWD"-360p`
+    AOP='-acodec aac -strict experimental -ar 44100 -b:a 64k'
+    VOP='-c:v h264_nvenc -rc vbr -minrate 400k -maxrate 1500k -bufsize 1500k'
+    mkdir -p ../"$DEST_DIR"
+    for i in *.{mp4,ts,mov,wmv,mpg,avi,mkv}; do
+      FF_TITLE="${i%%.*}"
+      FF_DESC=`basename "$PWD"`
+      TEST_LANG=$(ffprobe -hide_banner "$i" -show_entries stream=index:stream_tags=language -select_streams a -of compact=p=0:nk=1 |grep ita)
+        if [ -z "$TEST_LANG" ]; then
+	  LINGUA=$LANG_STD
+        else
+	  LINGUA=$LANG_ITA
+        fi
+      ffmpeg $HW -i "$i" -vf scale_cuda=-1:$H $VOP $AOP $OPT $LINGUA $TITLES="$FF_TITLE" $DESC="$FF_DESC" $COMM="$FF_DESC" "../$DEST_DIR/${i%.*}.mp4";
+    done
+    ;;
+  2)
+    echo "Hai scelto 480p"
+    H=480
+    DEST_DIR=`basename "$PWD"-480p`
+    AOP='-acodec aac -strict experimental -ar 44100 -b:a 64k'
+    VOP='-c:v h264_nvenc -rc vbr -minrate 500k -maxrate 2M -bufsize 2M'
+    mkdir -p ../"$DEST_DIR"
+    for i in *.{mp4,ts,mov,wmv,mpg,avi,mkv}; do
+      FF_TITLE="${i%%.*}"
+      FF_DESC=`basename "$PWD"`
+      TEST_LANG=$(ffprobe -hide_banner "$i" -show_entries stream=index:stream_tags=language -select_streams a -of compact=p=0:nk=1 |grep ita)
+        if [ -z "$TEST_LANG" ]; then
+	  LINGUA=$LANG_STD
+        else
+	  LINGUA=$LANG_ITA
+        fi
+      ffmpeg $HW -i "$i" -vf scale_cuda=-1:$H $VOP $AOP $OPT $LINGUA $TITLES="$FF_TITLE" $DESC="$FF_DESC" $COMM="$FF_DESC" "../$DEST_DIR/${i%.*}.mp4";
+    done
+    ;;
+  3)
+    echo "Hai scelto 720p"
+    H=720
+    DEST_DIR=`basename "$PWD"-720p`
+    AOP='-acodec aac -strict experimental -ar 48000 -b:a 640k'
+    VOP='-c:v h264_nvenc -rc vbr_hq -profile:v main -minrate 1500k -maxrate 4M -bufsize 5M'
+    mkdir -p ../"$DEST_DIR"
+    for i in *.{mp4,ts,mov,wmv,mpg,avi,mkv}; do
+      FF_TITLE="${i%%.*}"
+      FF_DESC=`basename "$PWD"`
+      TEST_LANG=$(ffprobe -hide_banner "$i" -show_entries stream=index:stream_tags=language -select_streams a -of compact=p=0:nk=1 |grep ita)
+        if [ -z "$TEST_LANG" ]; then
+	  LINGUA=$LANG_STD
+        else
+	  LINGUA=$LANG_ITA
+        fi
+      ffmpeg $HW -i "$i" -vf scale_cuda=-1:$H $VOP $AOP $OPT $LINGUA $TITLES="$FF_TITLE" $DESC="$FF_DESC" $COMM="$FF_DESC" "../$DEST_DIR/${i%.*}.mp4";
+    done
+    ;;
+  4)
+    echo "Hai scelto 720p con AC 5.1"
+    H=720
+    DEST_DIR=`basename "$PWD"-720p`
+    AOP='-acodec ac3 -ac 6 -strict experimental -ar 48000 -b:a 640k'
+    VOP='-c:v h264_nvenc -rc vbr_hq -profile:v main -minrate 1500k -maxrate 4M -bufsize 5M'
+    mkdir -p ../"$DEST_DIR"
+    for i in *.{mp4,ts,mov,wmv,mpg,avi,mkv}; do
+      FF_TITLE="${i%%.*}"
+      FF_DESC=`basename "$PWD"`
+      TEST_LANG=$(ffprobe -hide_banner "$i" -show_entries stream=index:stream_tags=language -select_streams a -of compact=p=0:nk=1 |grep ita)
+        if [ -z "$TEST_LANG" ]; then
+	  LINGUA=$LANG_STD
+        else
+	  LINGUA=$LANG_ITA
+        fi
+      ffmpeg $HW -i "$i" -vf scale_cuda=-1:$H $VOP $AOP $OPT $LINGUA $TITLES="$FF_TITLE" $DESC="$FF_DESC" $COMM="$FF_DESC" "../$DEST_DIR/${i%.*}.mp4";
+    done
+    ;;
+  5)
+    echo "Hai scelto 1080p"
+    H=1080
+    DEST_DIR=`basename "$PWD"-1080p`
+    AOP='-acodec aac -strict experimental -ar 48000 -b:a 1536k'
+    VOP='-c:v h264_nvenc -rc vbr_hq -profile:v main -minrate 3500k -maxrate 9M -bufsize 9M'
+    mkdir -p ../"$DEST_DIR"
+    for i in *.{mp4,ts,mov,wmv,mpg,avi,mkv}; do
+      FF_TITLE="${i%%.*}"
+      FF_DESC=`basename "$PWD"`
+      TEST_LANG=$(ffprobe -hide_banner "$i" -show_entries stream=index:stream_tags=language -select_streams a -of compact=p=0:nk=1 |grep ita)
+        if [ -z "$TEST_LANG" ]; then
+	  LINGUA=$LANG_STD
+        else
+	  LINGUA=$LANG_ITA
+        fi
+      ffmpeg $HW -i "$i" -vf scale_cuda=-1:$H $VOP $AOP $OPT $LINGUA $TITLES="$FF_TITLE" $DESC="$FF_DESC" $COMM="$FF_DESC" "../$DEST_DIR/${i%.*}.mp4";
+    done
+    ;;
+  6)
+    echo "Hai scelto 1080p con AC 5.1"
+    H=1080
+    DEST_DIR=`basename "$PWD"-1080p`
+    AOP='-acodec ac3 -ac 6 -strict experimental -ar 48000 -b:a 1536k'
+    VOP='-c:v h264_nvenc -rc vbr_hq -profile:v main -minrate 3500k -maxrate 9M -bufsize 9M'
+    mkdir -p ../"$DEST_DIR"
+    for i in *.{mp4,ts,mov,wmv,mpg,avi,mkv}; do
+      FF_TITLE="${i%%.*}"
+      FF_DESC=`basename "$PWD"`
+      TEST_LANG=$(ffprobe -hide_banner "$i" -show_entries stream=index:stream_tags=language -select_streams a -of compact=p=0:nk=1 |grep ita)
+        if [ -z "$TEST_LANG" ]; then
+	  LINGUA=$LANG_STD
+        else
+	  LINGUA=$LANG_ITA
+        fi
+      ffmpeg $HW -i "$i" -vf scale_cuda=-1:$H $VOP $AOP $OPT $LINGUA $TITLES="$FF_TITLE" $DESC="$FF_DESC" $COMM="$FF_DESC" "../$DEST_DIR/${i%.*}.mp4";
+    done
+    ;;
+  7)
+    echo "Hai scelto di convertire da TS a MP4"
+    H=1080
+    DEST_DIR=`basename "$PWD"-mp4`
+    mkdir -p ../"$DEST_DIR"
+    for i in *.{mp4,ts,mov,wmv,mpg,avi,mkv}; do
+        ffmpeg -i "$i" -acodec copy -vcodec copy "../$DEST_DIR/${i%.*}.mp4";
+    done
+    ;;
+
+
+esac

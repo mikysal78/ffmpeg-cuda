@@ -67,3 +67,7 @@
     make distclean
   args:
     chdir: "{{ source_dir }}/ffmpeg"
+
+- name: copy VideoConverver
+  copy: src=../files/videoconverter dest=/usr/local/bin/videoconverter
+

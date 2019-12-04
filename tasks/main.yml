@@ -58,11 +58,12 @@
   command: /sbin/ldconfig
 
 - name: compile ffmpeg
-  command: "{{ item }}" 
+  shell: |
+    set -e
+    ./etc/profile.d/cuda.sh
+    ./configure {{ ffmpeg_compile_options }}
+    make -j$(nproc)
+    make install
+    make distclean
   args:
     chdir: "{{ source_dir }}/ffmpeg"
-  with_items:
-    - "./configure {{ ffmpeg_compile_options }}"
-    - make -j$(nproc)
-    - make install
-    - make distclean

@@ -68,6 +68,9 @@
   args:
     chdir: "{{ source_dir }}/ffmpeg"
 
-- name: copy VideoConverver
-  copy: src=../files/videoconverter dest=/usr/local/bin/videoconverter
+- name: copy Video Converter scripts
+  copy:
+    src: ../files/videoconverter
+    dest: /usr/local/bin/videoconverter
+    mode: a+x
 

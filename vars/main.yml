@@ -10,7 +10,8 @@ deps:
   - autoconf 
   - automake 
   - build-essential 
-  - libass-dev 
+  - libass-dev
+  - dialog 
   #- libgpac-dev
   - nasm
   - libtheora-dev 

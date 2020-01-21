@@ -14,6 +14,7 @@ deps:
   - dialog 
   #- libgpac-dev
   - nasm
+  - libavdevice-dev
   - libtheora-dev 
   - libtool 
   - libvorbis-dev 

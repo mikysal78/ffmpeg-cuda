@@ -10,9 +10,9 @@ Requirements
 ----------------
 
 - [NVIDIA x86_64 440.44](http://it.download.nvidia.com/XFree86/Linux-x86_64/440.44/NVIDIA-Linux-x86_64-440.44.run)
-  vedere il link per l'ultimo driver (https://www.nvidia.it/Download/driverResults.aspx/156100/it)
+  vedere il link per l'[ultimo driver](https://www.nvidia.it/Download/driverResults.aspx/156100/it)
 - [CUDA 440.33.01](http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda_10.2.89_440.33.01_linux.run)
-  vedere il link per l'ultima release (https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804)
+  vedere il link per l'[ultima release](https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804)
 - add in your /etc/apt/sources.list: deb http://www.deb-multimedia.org buster main non-free
 - install role: ansible-galaxy install -f mikysal78.ffmpeg_cuda
 

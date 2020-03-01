@@ -59,4 +59,4 @@ deps:
   - libx264-dev
   - libvpx-dev
   - libssl-dev
-
+  - libebml-dev

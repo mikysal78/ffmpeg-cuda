@@ -5,6 +5,7 @@
 repo_yasm: git://github.com/yasm/yasm.git
 repo_nv_codec: https://git.videolan.org/git/ffmpeg/nv-codec-headers.git
 repo_ffmpeg: https://git.ffmpeg.org/ffmpeg.git
+repo_vmaf: https://github.com/Netflix/vmaf.git
 
 # configure options
 ffmpeg_compile_options: --disable-decoder=amrnb --disable-decoder=libopenjpeg --disable-libopencv --disable-outdev=sdl2 --disable-podpages --disable-sndio --disable-stripping --enable-libaom --enable-avfilter --enable-avresample --enable-gcrypt --disable-gnutls --enable-openssl --enable-gpl --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libfdk-aac --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libilbc --enable-libkvazaar --enable-libmp3lame --enable-libopenh264 --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libx265 --enable-libzimg --enable-libxvid --enable-libzvbi --enable-nonfree --enable-opencl --enable-opengl --enable-postproc --enable-pthreads --enable-shared --enable-version3 --enable-libwebp --enable-libx264 --enable-libdc1394 --enable-vaapi --enable-libmfx --enable-libvmaf --disable-altivec --enable-nvenc --enable-cuda --enable-cuvid --enable-cuda-nvcc --enable-libnpp --extra-cflags=-I/usr/local/cuda/include --extra-ldflags=-L/usr/local/cuda/lib64

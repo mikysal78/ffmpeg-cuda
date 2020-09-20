@@ -27,6 +27,11 @@
        dest={{ source_dir }}/nv_codec
        accept_hostkey=yes
 
+- name: clone latest VMAF (Video Multi-Method Assessment Fusion)
+  git: repo={{ repo_vmaf }}
+       dest={{ source_dir }}/vmaf
+       accept_hostkey=yes
+
 # Compiling
 - name: compile yasm 
   command: "{{ item }}"
@@ -48,6 +53,14 @@
     - make
     - make install
 
+- name: compile VMAF (Video Multi-Method Assessment Fusion)
+  command: "{{ item }}" 
+  args:
+    chdir: "{{ source_dir }}/vmaf" 
+  with_items:
+    - make
+    - make install
+      
 - name: copy file cudash in profile.d and setting path
   copy: src=../files/cuda.sh dest=/etc/profile.d/cuda.sh
 

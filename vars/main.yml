@@ -14,6 +14,11 @@ deps:
   - dialog 
   #- libgpac-dev
   - nasm
+  - meson
+  - cython
+  - cython3
+  - python3-numpy
+  - python-numpy
   - libavdevice-dev
   - libtheora-dev 
   - libtool 
